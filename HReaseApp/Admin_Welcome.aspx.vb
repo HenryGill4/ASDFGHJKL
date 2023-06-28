@@ -41,7 +41,6 @@ Partial Class Admin_Welcome
             CompanySummaryChart()
             ElectionSummaryChart()
             GetScreenConfig()
-            PrepareChartData()
             PrepareElectionChartData()
 
             intCompanyId = Session("ShadowCompanyId")

@@ -99,7 +99,7 @@
         <div id="divChartArea" runat="server" class="grid-container">
 
     <div class="grid-item">
-                <canvas id="chart1"></canvas>
+                <canvas id="myChart1"></canvas>
         <h4>Demographic Breakdown</h4>
 
                 <div id="divLineChart" runat="server" >
@@ -136,7 +136,7 @@
                 </div>
             </div>
             <div class="grid-item">
-                <canvas id="chart2"></canvas>
+                <canvas id="myChart2"></canvas>
 
         <h4>Election Summary</h4>
                 <asp:Chart ID="Chart2" runat="server"  Width="500px" Height="400px" AntiAliasing="All" CssClass="chart" BackColor="white" BorderSkin-SkinStyle="None" PaletteCustomColors="DarkBlue; LightGray; LightSteelBlue; Tan; SlateGray; DarkSlateBlue; CornflowerBlue; WhiteSmoke; Gray; LightBlue; DarkSalmon; Lavender; Navy; PaleTurquoise; CadetBlue; Beige; Silver; Azure; MediumPurple; Honeydew; SteelBlue; AntiqueWhite; RosyBrown; Thistle">
@@ -335,35 +335,51 @@
 }
 
     </style>
-    <script>
-        // JavaScript code to fetch the data and populate the charts
+<script>
+    var ctx1 = document.getElementById('myChart1').getContext('2d');
+    var myChart1 = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: <%= CompanySummaryChartData.labels %>,
+            datasets: [{
+                label: '# of Votes',
+                data: <%= CompanySummaryChartData.data %>,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 
-        // TODO: Replace the URLs with the actual URLs of your data endpoints
-        const urlForChart1Data = 'URL_FOR_CHART_1_DATA';
-        const urlForChart2Data = 'URL_FOR_CHART_2_DATA';
-
-        fetch(urlForChart1Data)
-            .then(response => response.json())
-            .then(data => {
-                const ctx = document.getElementById('chart1').getContext('2d');
-                new Chart(ctx, {
-                    type: 'line', // Change this to the type of chart you want
-                    data: data,
-                    options: {}
-                });
-            });
-
-        fetch(urlForChart2Data)
-            .then(response => response.json())
-            .then(data => {
-                const ctx = document.getElementById('chart2').getContext('2d');
-                new Chart(ctx, {
-                    type: 'line', // Change this to the type of chart you want
-                    data: data,
-                    options: {}
-                });
-            });
-    </script>
+    var ctx2 = document.getElementById('myChart2').getContext('2d');
+    var myChart2 = new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: <%= ElectionSummaryChartData.labels %>,
+            datasets: [{
+                label: '# of Votes',
+                data: <%= ElectionSummaryChartData.data %>,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 </asp:Content>
 
 <asp:Content ID="Benefit" ContentPlaceHolderID="Benefit" runat="Server">
