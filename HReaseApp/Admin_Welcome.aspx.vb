@@ -142,21 +142,21 @@ Partial Class Admin_Welcome
         End If
 
     End Sub
-    Public Function PrepareChartData() As String
+    Public Function PrepareChartData(c As Company) As String
         ' Prepare the data for the chart
-        c.GetCompanyChartSummary(intCompanyId, Session("UserId"))
-        Dim labels As New List(Of String) From {"TotalEmployees", "Eligible", "NonEligible", "Benefits", "NoBenefits", "Medical", "Other"}
-        Dim data As New List(Of Double) From {c.TotalEmployees, c.EligibleEmployees, c.NonEligibleEmployees, c.EmpsWithBenefits, c.EmpsWithoutBenefits, c.EmpsMedical, c.EmpsOther}
+        Dim labels As New List(Of String) From {"Eligible", "NonEligible", "Benefits", "NoBenefits", "Medical", "Other"}
+        Dim data As New List(Of Double) From {c.EligibleEmployees, c.NonEligibleEmployees, c.EmpsWithBenefits, c.EmpsWithoutBenefits, c.EmpsMedical, c.EmpsOther}
 
         ' Convert the data into JSON format
         Return "{ ""labels"": " & JsonConvert.SerializeObject(labels) & ", ""data"": " & JsonConvert.SerializeObject(data) & " }"
     End Function
 
-    Public ReadOnly Property ChartData As String
+    Public ReadOnly Property ChartData(c As Company) As String
         Get
-            Return PrepareChartData()
+            Return PrepareChartData(c)
         End Get
     End Property
+
     Public Function PrepareElectionChartData() As String
         ' Prepare the data for the chart
         Dim dsElections As New DataSet()
@@ -189,6 +189,7 @@ Partial Class Admin_Welcome
         Dim intNoBenefits As Integer
         Dim intMedical As Integer
         Dim intOther As Integer
+
 
         If c.TotalEmployees > 0 Then
             If c.EligibleEmployees > 0 Then
