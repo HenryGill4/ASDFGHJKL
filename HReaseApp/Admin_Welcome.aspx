@@ -99,7 +99,9 @@
         <div id="divChartArea" runat="server" class="grid-container">
 
     <div class="grid-item">
+                <canvas id="chart1"></canvas>
         <h4>Demographic Breakdown</h4>
+
                 <div id="divLineChart" runat="server" >
                    <asp:Chart ID="Chart1" runat="server" Width="500px" Height="400px" AntiAliasing="All" AlternateText="No Company Information Available" BorderlineWidth="0" CssClass="chart" Pallet="Excel" >
                        <Series>
@@ -134,6 +136,8 @@
                 </div>
             </div>
             <div class="grid-item">
+                <canvas id="chart2"></canvas>
+
         <h4>Election Summary</h4>
                 <asp:Chart ID="Chart2" runat="server"  Width="500px" Height="400px" AntiAliasing="All" CssClass="chart" BackColor="white" BorderSkin-SkinStyle="None" PaletteCustomColors="DarkBlue; LightGray; LightSteelBlue; Tan; SlateGray; DarkSlateBlue; CornflowerBlue; WhiteSmoke; Gray; LightBlue; DarkSalmon; Lavender; Navy; PaleTurquoise; CadetBlue; Beige; Silver; Azure; MediumPurple; Honeydew; SteelBlue; AntiqueWhite; RosyBrown; Thistle">
     <Series>
@@ -331,6 +335,35 @@
 }
 
     </style>
+    <script>
+        // JavaScript code to fetch the data and populate the charts
+
+        // TODO: Replace the URLs with the actual URLs of your data endpoints
+        const urlForChart1Data = 'URL_FOR_CHART_1_DATA';
+        const urlForChart2Data = 'URL_FOR_CHART_2_DATA';
+
+        fetch(urlForChart1Data)
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('chart1').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line', // Change this to the type of chart you want
+                    data: data,
+                    options: {}
+                });
+            });
+
+        fetch(urlForChart2Data)
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('chart2').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line', // Change this to the type of chart you want
+                    data: data,
+                    options: {}
+                });
+            });
+    </script>
 </asp:Content>
 
 <asp:Content ID="Benefit" ContentPlaceHolderID="Benefit" runat="Server">
