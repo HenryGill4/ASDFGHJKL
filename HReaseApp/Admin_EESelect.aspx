@@ -154,25 +154,8 @@
                     <asp:Button runat="server" ID="filterbtn" cssclass="Filterbtn" Onclick="filterbtn_Click" Text="Filter" />
 
                 </p>
-            </div>
-        </div>
-
-        <div id="FiltersDiv" runat="server" class="Filterdiv" >
-            <div id="Search_Filters" class="header">
-                <span>Search Filters</span>
-            </div>
-            <div class="well HRESlateBlue HRERewrap form-inline">
-            
-            <div id="AdminCompanyDiv" class="dropdowndiv">
-
-                <asp:Label ID="lblAdminCompany" runat="server" Visible="false" class="dropdownlbl">Admin Company:</asp:Label>
-                <asp:DropDownList ID="ddlAdminCompany" runat="server" Visible="false" TabIndex="1" DataValueField="CompanyId" DataTextField="CombinedCompanyName" AutoPostBack="false" OnSelectedIndexChanged="ddlAdminCompany_SelectedIndexChanged" CssClass="dropdownbox" />
-            </div>
-            <div id="ParentCompanyDiv" class="dropdowndiv">
-                <asp:Label ID="lblParentCompany" runat="server" Text="Parent Company:" Visible="false" class="dropdownlbl">Parent Company:</asp:Label>
-                <asp:DropDownList ID="ddlParentCompany" runat="server" Visible="false" TabIndex="1" DataValueField="CompanyId" DataTextField="CombinedCompanyName" AutoPostBack="false" OnSelectedIndexChanged="ddlParentCompany_SelectedIndexChanged" CssClass="dropdownbox" />
-            </div>
-            <div id="CompanyStatusDiv" class="dropdowndiv">
+                <div class="form-group">
+                <div id="CompanyStatusDiv" class="dropdowndiv">
                 <span class="dropdownlbl">Company Status:</span>
                 <asp:DropDownList runat="server" ID="CompanyStatusDropDown" DataValueField="value" CssClass="dropdownbox">
                     <asp:ListItem Value="Active">
@@ -201,6 +184,29 @@
                 </asp:DropDownList>
 
             </div>
+                    </div>
+            </div>
+            
+        </div>
+
+
+        <div id="FiltersDiv" runat="server" class="Filterdiv" >
+            <div id="Search_Filters" class="header">
+                <span>Search Filters</span>
+            </div>
+            <div class="well HRESlateBlue HRERewrap form-inline">
+            
+            <div id="AdminCompanyDiv" class="dropdowndiv">
+
+                <asp:Label ID="lblAdminCompany" runat="server" Visible="false" class="dropdownlbl">Admin Company:</asp:Label>
+                <asp:DropDownList ID="ddlAdminCompany" runat="server" Visible="false" TabIndex="1" DataValueField="CompanyId" DataTextField="CombinedCompanyName" AutoPostBack="false" OnSelectedIndexChanged="ddlAdminCompany_SelectedIndexChanged" CssClass="dropdownbox" />
+            </div>
+            <div id="ParentCompanyDiv" class="dropdowndiv">
+                <asp:Label ID="lblParentCompany" runat="server" Text="Parent Company:" Visible="false" class="dropdownlbl">Parent Company:</asp:Label>
+                <asp:DropDownList ID="ddlParentCompany" runat="server" Visible="false" TabIndex="1" DataValueField="CompanyId" DataTextField="CombinedCompanyName" AutoPostBack="false" OnSelectedIndexChanged="ddlParentCompany_SelectedIndexChanged" CssClass="dropdownbox" />
+            </div>
+            
+            
             <div class="orderbychkdiv">
                 <asp:CheckBox ID="chkOrderByNumber" runat="server" Text="&nbsp;&nbsp;Order by Company Number" CssClass="orderbycompanynumber" Checked="false" OnCheckedChanged="chkOrderByNumber_CheckedChanged" AutoPostBack="false"></asp:CheckBox>
             </div>

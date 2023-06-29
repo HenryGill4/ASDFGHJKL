@@ -1,6 +1,7 @@
 ﻿Imports System.Web.UI.DataVisualization.Charting
 Imports System.Data.SqlClient
 Imports System.IO
+Imports Newtonsoft.Json
 
 Partial Class Admin_Welcome
     Inherits System.Web.UI.Page
@@ -40,6 +41,7 @@ Partial Class Admin_Welcome
             CompanySummaryChart()
             ElectionSummaryChart()
             GetScreenConfig()
+            PrepareElectionChartData()
 
             intCompanyId = Session("ShadowCompanyId")
 
@@ -139,7 +141,44 @@ Partial Class Admin_Welcome
         End If
 
     End Sub
+    Public Function PrepareChartData(c As Company) As String
+        ' Prepare the data for the chart
+        Dim labels As New List(Of String) From {"Eligible", "NonEligible", "Benefits", "NoBenefits", "Medical", "Other"}
+        Dim data As New List(Of Double) From {c.EligibleEmployees, c.NonEligibleEmployees, c.EmpsWithBenefits, c.EmpsWithoutBenefits, c.EmpsMedical, c.EmpsOther}
 
+        ' Convert the data into JSON format
+        Return "{ ""labels"": " & JsonConvert.SerializeObject(labels) & ", ""data"": " & JsonConvert.SerializeObject(data) & " }"
+    End Function
+
+    Public ReadOnly Property ChartData(c As Company) As String
+        Get
+            Return PrepareChartData(c)
+        End Get
+    End Property
+
+    Public Function PrepareElectionChartData() As String
+        ' Prepare the data for the chart
+        Dim dsElections As New DataSet()
+        c.GetElectionChartSummary(intCompanyId, Session("UserId"), dsElections)
+
+        Dim dtElections As DataTable = dsElections.Tables(0)
+        Dim labels As New List(Of String)
+        Dim data As New List(Of Double)
+
+        For Each row As DataRow In dtElections.Rows
+            labels.Add(row("Legend").ToString())
+            data.Add(Double.Parse(row("Elections").ToString()))
+        Next
+
+        ' Convert the data into JSON format
+        Return "{ ""labels"": " & JsonConvert.SerializeObject(labels) & ", ""data"": " & JsonConvert.SerializeObject(data) & " }"
+    End Function
+
+    Public ReadOnly Property ElectionChartData As String
+        Get
+            Return PrepareElectionChartData()
+        End Get
+    End Property
     Private Sub CompanySummaryChart()
         c.GetCompanyChartSummary(intCompanyId, Session("UserId"))
 
@@ -149,6 +188,7 @@ Partial Class Admin_Welcome
         Dim intNoBenefits As Integer
         Dim intMedical As Integer
         Dim intOther As Integer
+
 
         If c.TotalEmployees > 0 Then
             If c.EligibleEmployees > 0 Then

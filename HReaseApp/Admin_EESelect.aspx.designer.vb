@@ -104,6 +104,24 @@ Partial Public Class Admin_EESelect
     Protected WithEvents filterbtn As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''CompanyStatusDropDown control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CompanyStatusDropDown As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''EmployeeDropDown control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents EmployeeDropDown As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
     '''FiltersDiv control.
     '''</summary>
     '''<remarks>
@@ -147,24 +165,6 @@ Partial Public Class Admin_EESelect
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlParentCompany As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''CompanyStatusDropDown control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents CompanyStatusDropDown As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''EmployeeDropDown control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents EmployeeDropDown As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''chkOrderByNumber control.
